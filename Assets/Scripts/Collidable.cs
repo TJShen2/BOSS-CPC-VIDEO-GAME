@@ -5,6 +5,8 @@ using UnityEngine;
 public class Collidable : MonoBehaviour
 {
     public GameObject particles;
+    public GameObject scoreMenu;
+    public bool canCollide;
 
     //This method will run when the player collides with something
     void OnCollisionEnter2D(Collision2D col) {
@@ -25,5 +27,9 @@ public class Collidable : MonoBehaviour
             //Destroy the particles after 2 seconds
             Destroy(deathParticles, 2);
         }
+    }
+
+    void HideScoreMenu() {
+        scoreMenu.SetActive(false);
     }
 }
