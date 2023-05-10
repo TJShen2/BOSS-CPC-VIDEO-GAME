@@ -42,21 +42,24 @@ public class ScoreMenu : MonoBehaviour
         //Check if anyone won
         if (playerWins == 5) {
             showWinScreen(true);
-            Invoke("hideWinScreen", 2);
         } else if (enemyWins == 5) {
             showWinScreen(false);
-            Invoke("hideWinScreen", 2);
+            
         } else
             resetPlayers.Invoke();
     }
 
     //true = player won, false = enemy won
     void showWinScreen(bool playerWon) {
+        winScreen.SetActive(true);
+
         if (playerWon) {
             winText.SetText("You win!");
         } else {
             winText.SetText("You lose!");
         }
+
+        Invoke("hideWinScreen", 2);
     }
 
     void hideWinScreen() {
@@ -64,6 +67,8 @@ public class ScoreMenu : MonoBehaviour
         enemyWins = 0;
 
         winScreen.SetActive(false);
+
+        resetPlayers.Invoke();
     }
     
 }

@@ -6,12 +6,25 @@ public class Collidable : MonoBehaviour
 {
     public GameObject particles;
     public GameObject scoreMenu;
-    public bool canCollide;
+    private bool canCollide;
+
+    public bool CanCollide {
+        get { return canCollide; }
+        set { canCollide = value; }
+    }
+
+    public Enemy enemy;
 
     //This method will run when the player collides with something
     void OnCollisionEnter2D(Collision2D col) {
         
         if (col.gameObject.tag == "Kill Block") {
+            if(gameObject.tag == "Player")
+                scoreMenu.GetComponent<ScoreMenu>().AddEnemyWin();
+            else
+                scoreMenu.GetComponent<ScoreMenu>().AddPlayerWin();
+
+            ShowScoreMenu();
 
             //Spawn the kill particles at the collision site
             GameObject deathParticles = Instantiate(particles) as GameObject;
@@ -27,6 +40,12 @@ public class Collidable : MonoBehaviour
             //Destroy the particles after 2 seconds
             Destroy(deathParticles, 2);
         }
+    }
+
+    void ShowScoreMenu() {
+        scoreMenu.SetActive(true);
+        enemy.CanMove = false;
+        Invoke("HideScoreMenu", 2);
     }
 
     void HideScoreMenu() {
