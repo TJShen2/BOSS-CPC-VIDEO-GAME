@@ -6,7 +6,7 @@ public class Collidable : MonoBehaviour
 {
     public GameObject particles;
     public GameObject scoreMenu;
-    private bool canCollide;
+    private bool canCollide = true;
 
     public bool CanCollide {
         get { return canCollide; }
@@ -18,7 +18,7 @@ public class Collidable : MonoBehaviour
     //This method will run when the player collides with something
     void OnCollisionEnter2D(Collision2D col) {
         
-        if (col.gameObject.tag == "Kill Block") {
+        if (col.gameObject.tag == "Kill Block" && canCollide) {
             if(gameObject.tag == "Player")
                 scoreMenu.GetComponent<ScoreMenu>().AddEnemyWin();
             else
