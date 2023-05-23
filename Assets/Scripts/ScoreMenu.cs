@@ -7,8 +7,8 @@ using TMPro;
 public class ScoreMenu : MonoBehaviour
 {
     //Fields
-    private static int playerWins;
-    private static int enemyWins;
+    private int playerWins;
+    private int enemyWins;
 
     public void AddPlayerWin() {
         playerWins++;

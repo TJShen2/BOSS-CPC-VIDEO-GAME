@@ -154,7 +154,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 847800649}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -269,9 +269,8 @@ GameObject:
   - component: {fileID: 21752736}
   - component: {fileID: 21752735}
   - component: {fileID: 21752738}
+  - component: {fileID: 21752739}
   - component: {fileID: 21752737}
-  - component: {fileID: 21752740}
-  - component: {fileID: 21752741}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -339,7 +338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21752734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -383,7 +382,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &21752740
+--- !u!114 &21752739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -392,28 +391,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 21752734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe5c0b63f32d4a48ba6f573850e017b, type: 3}
+  m_Script: {fileID: 11500000, guid: df9c05b3f376f3a4eb0e66e839bafd5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 4355498331687486520, guid: 96f6821f27092044cba15f952daed4ad, type: 3}
   scoreMenu: {fileID: 847800648}
-  enemy: {fileID: 848290143}
---- !u!114 &21752741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21752734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efdc090ed8a372445a9290c96077803c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   moveSpeed: 100
+  normalDrag: 0
+  slowDrag: 1
   boostKey: 32
   slowKey: 304
-  canCollide: 0
 --- !u!1 &101419713
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +469,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 925.2, y: 492.40002}
+  m_SizeDelta: {x: 1157, y: 651}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &359451227
 MonoBehaviour:
@@ -981,10 +968,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1118702317}
   - {fileID: 4451015}
   - {fileID: 1794841253}
   - {fileID: 1449727676}
-  - {fileID: 1118702317}
   m_Father: {fileID: 464404374}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1014,7 +1001,7 @@ MonoBehaviour:
   deactivateCollision:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 21752740}
+      - m_Target: {fileID: 21752739}
         m_TargetAssemblyTypeName: Collidable, Assembly-CSharp
         m_MethodName: set_CanCollide
         m_Mode: 6
@@ -1026,7 +1013,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 848290138}
+      - m_Target: {fileID: 848290143}
         m_TargetAssemblyTypeName: Collidable, Assembly-CSharp
         m_MethodName: set_CanCollide
         m_Mode: 6
@@ -1041,8 +1028,8 @@ MonoBehaviour:
   resetPlayers:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 21752741}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 21752739}
+        m_TargetAssemblyTypeName: PlayerScript, Assembly-CSharp
         m_MethodName: reset
         m_Mode: 1
         m_Arguments:
@@ -1054,7 +1041,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 848290143}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_TargetAssemblyTypeName: EnemyScript, Assembly-CSharp
         m_MethodName: reset
         m_Mode: 1
         m_Arguments:
@@ -1076,9 +1063,8 @@ GameObject:
   - component: {fileID: 848290142}
   - component: {fileID: 848290141}
   - component: {fileID: 848290140}
-  - component: {fileID: 848290139}
   - component: {fileID: 848290143}
-  - component: {fileID: 848290138}
+  - component: {fileID: 848290139}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1086,21 +1072,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &848290138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848290136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe5c0b63f32d4a48ba6f573850e017b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particles: {fileID: 4355498331687486520, guid: 96f6821f27092044cba15f952daed4ad, type: 3}
-  scoreMenu: {fileID: 847800648}
-  enemy: {fileID: 848290143}
 --- !u!58 &848290139
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1198,7 +1169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848290136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1214,14 +1185,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 848290136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bae5dae1399f194a979afb0d75d761f, type: 3}
+  m_Script: {fileID: 11500000, guid: 18053b6e388ef2f438e49d9a30b20fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particles: {fileID: 4355498331687486520, guid: 96f6821f27092044cba15f952daed4ad, type: 3}
+  scoreMenu: {fileID: 847800648}
   moveSpeed: 100
-  boostKey: 32
-  slowKey: 304
+  normalDrag: 0
+  slowDrag: 1
   player: {fileID: 21752736}
-  attackRadius: 5
+  attackRadius: 10
 --- !u!1 &890534954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,12 +1337,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 847800649}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 825.2, y: 392.40002}
+  m_SizeDelta: {x: 1057, y: 558}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1118702318
 MonoBehaviour:
@@ -1440,7 +1413,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 847800649}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1575,7 +1548,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 847800649}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

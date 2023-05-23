@@ -13,8 +13,6 @@ public class Collidable : MonoBehaviour
         set { canCollide = value; }
     }
 
-    public Enemy enemy;
-
     //This method will run when the player collides with something
     void OnCollisionEnter2D(Collision2D col) {
         
@@ -44,7 +42,6 @@ public class Collidable : MonoBehaviour
 
     void ShowScoreMenu() {
         scoreMenu.SetActive(true);
-        enemy.CanMove = false;
         Invoke("HideScoreMenu", 2);
     }
 

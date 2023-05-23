@@ -2,26 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public KeyCode boostKey = KeyCode.Space;
     public KeyCode slowKey = KeyCode.LeftShift;
 
-    public Transform player;
-
-    public float attackRadius;
+    public float normalDrag = 0f;
+    public float slowDrag = 1f;
 
     private bool canMove;
-
-    public bool CanMove {
-        get { return canMove; }
-        set { canMove = value; }
-    }
-
     private bool canBoost; 
 
-    private bool canCollide;
+    public bool canCollide;
 
     public bool CanCollide {
         get {return canCollide;}
@@ -41,25 +34,40 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
+        if(Input.GetKey(boostKey) && canBoost)
+        {
+            rb2d.velocity = Vector2.zero; 
+            canMove = false;
+        }
+
+        if(Input.GetKeyUp(boostKey) && canBoost)
+        {
+            canMove = true;
+            StartCoroutine(boost());
+        }
+
+        if(Input.GetKey(slowKey))
+        {
+            rb2d.drag = slowDrag;
+        }
+
+        else
+            rb2d.drag = normalDrag;
+
     }
 
     // Called every fixed timestep
     // Used for physics
     void FixedUpdate()
     {
-        Vector2 dir = player.position - transform.position;
+        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         Vector2 dirNormalized = dir.normalized;
 
         transform.up = dirNormalized;
 
-        if(dir.sqrMagnitude <= attackRadius && canBoost)
-        {
-            StartCoroutine(boost());
-        }
-
-        else if(canMove)
+        if(canMove)
             rb2d.AddForce(transform.up * moveSpeed * Time.deltaTime, ForceMode2D.Force);
-        
+
     }
 
     IEnumerator boost ()
@@ -72,7 +80,7 @@ public class Enemy : MonoBehaviour
 
     public void reset() {
         gameObject.SetActive(true);
-        gameObject.transform.position = new Vector3(0, -4, 0);
+        gameObject.transform.position = new Vector3(0, 4, 0);
         canMove = true;
         canBoost = true;
         gameObject.GetComponent<Collidable>().CanCollide = true;
