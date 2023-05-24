@@ -1,3 +1,5 @@
+// This is the old player controller script
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
