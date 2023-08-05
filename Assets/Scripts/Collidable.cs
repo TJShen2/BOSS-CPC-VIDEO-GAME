@@ -6,22 +6,32 @@ public class Collidable : MonoBehaviour
 {
     public GameObject particles;
     public GameObject scoreMenu;
-    private bool canCollide = true;
+    public Enemy enemy;
+    public GameObject projectile;
 
-    public bool CanCollide {
-        get { return canCollide; }
-        set { canCollide = value; }
+    private bool canCollide = true;
+    public bool CanCollide{
+        get{return canCollide;}
+        set{canCollide = value;}
+    }
+
+    void Start()
+    {
+        canCollide = true;
     }
 
     //This method will run when the player collides with something
     void OnCollisionEnter2D(Collision2D col) {
-        
-        if (col.gameObject.tag == "Kill Block" && canCollide) {
-            if(gameObject.tag == "Player")
-                scoreMenu.GetComponent<ScoreMenu>().AddEnemyWin();
-            else
-                scoreMenu.GetComponent<ScoreMenu>().AddPlayerWin();
+        if(gameObject.tag == "Enemy" && col.gameObject.layer == 6){
+            return;
+        }
+        else if(col.gameObject.tag == "Kill Block" && canCollide){
 
+            if (gameObject.tag == "Player"){
+                scoreMenu.GetComponent<ScoreMenu>().AddEnemyWin();
+            } else {
+                scoreMenu.GetComponent<ScoreMenu>().AddPlayerWin();
+            }
             ShowScoreMenu();
 
             //Spawn the kill particles at the collision site
@@ -40,11 +50,12 @@ public class Collidable : MonoBehaviour
         }
     }
 
-    void ShowScoreMenu() {
+    void ShowScoreMenu(){
         scoreMenu.SetActive(true);
-        Invoke("HideScoreMenu", 2);
+        enemy.CanMove = false;
+        Invoke("HideScoreMenu",2);
     }
-
+    
     void HideScoreMenu() {
         scoreMenu.SetActive(false);
     }
