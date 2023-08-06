@@ -397,12 +397,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 4355498331687486520, guid: 96f6821f27092044cba15f952daed4ad, type: 3}
-<<<<<<< Updated upstream
-=======
   scoreMenu: {fileID: 847800648}
   enemy: {fileID: 848290143}
   projectile: {fileID: 857549951}
->>>>>>> Stashed changes
 --- !u!114 &21752741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,7 +1013,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
 --- !u!114 &848290138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,8 +1026,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 4355498331687486520, guid: 96f6821f27092044cba15f952daed4ad, type: 3}
-=======
->>>>>>> Stashed changes
 --- !u!58 &848290139
 CircleCollider2D:
   m_ObjectHideFlags: 0
