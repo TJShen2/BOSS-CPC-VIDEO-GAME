@@ -1,5 +1,3 @@
-// This is the old player controller script
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,18 +8,10 @@ public class PlayerController : MonoBehaviour
     public KeyCode boostKey = KeyCode.Space;
     public KeyCode slowKey = KeyCode.LeftShift;
 
-    public float normalDrag = 0f;
-    public float slowDrag = 1f;
-
     private bool canMove;
     private bool canBoost; 
 
-    public bool canCollide;
-
-    public bool CanCollide {
-        get {return canCollide;}
-        set {canCollide = value;}
-    }
+    private bool canCollide;
 
     private Rigidbody2D rb2d;   
     // Start is called before the first frame update
@@ -50,12 +40,13 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(slowKey))
         {
-            rb2d.drag = slowDrag;
+            rb2d.drag = 1f;
         }
 
         else
-            rb2d.drag = normalDrag;
-
+        {
+            rb2d.drag = 0f;
+        }
     }
 
     // Called every fixed timestep
@@ -72,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    IEnumerator boost ()
+    IEnumerator boost()
     {
         canBoost = false; 
         rb2d.AddForce(transform.up * 10, ForceMode2D.Impulse);
@@ -80,9 +71,10 @@ public class PlayerController : MonoBehaviour
         canBoost = true;
     }
 
-    public void reset() {
+    public void reset(){
         gameObject.SetActive(true);
-        gameObject.transform.position = new Vector3(0, 4, 0);
+        rb2d.velocity = Vector2.zero;
+        gameObject.transform.position = new Vector3(0,4,0);
         canMove = true;
         canBoost = true;
         gameObject.GetComponent<Collidable>().CanCollide = true;

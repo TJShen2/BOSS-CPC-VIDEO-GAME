@@ -7,8 +7,8 @@ using TMPro;
 public class ScoreMenu : MonoBehaviour
 {
     //Fields
-    private int playerWins;
-    private int enemyWins;
+    private static int playerWins;
+    private static int enemyWins;
 
     public void AddPlayerWin() {
         playerWins++;
@@ -38,13 +38,11 @@ public class ScoreMenu : MonoBehaviour
     }
 
     void OnDisable() {
-
         //Check if anyone won
         if (playerWins == 5) {
             showWinScreen(true);
         } else if (enemyWins == 5) {
             showWinScreen(false);
-            
         } else
             resetPlayers.Invoke();
     }
@@ -58,7 +56,6 @@ public class ScoreMenu : MonoBehaviour
         } else {
             winText.SetText("You lose!");
         }
-
         Invoke("hideWinScreen", 2);
     }
 
@@ -69,6 +66,5 @@ public class ScoreMenu : MonoBehaviour
         winScreen.SetActive(false);
 
         resetPlayers.Invoke();
-    }
-    
+    }   
 }
