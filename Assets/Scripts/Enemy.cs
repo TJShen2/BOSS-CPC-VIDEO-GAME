@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject Projectile;
+
     public float moveSpeed;
     public KeyCode boostKey = KeyCode.Space;
     public KeyCode slowKey = KeyCode.LeftShift;
@@ -13,7 +15,19 @@ public class Enemy : MonoBehaviour
     public float attackRadius;
 
     private bool canMove;
+<<<<<<< Updated upstream
     private bool canBoost; 
+=======
+    //private bool canBoost; 
+    [SerializeField] private bool canShoot;
+
+    public bool CanMove{
+        get{return canMove;}
+        set{canMove = value;}
+    }
+
+    public static bool ProjectileTargeting;
+>>>>>>> Stashed changes
 
     public bool canCollide;
 
@@ -22,14 +36,15 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         canMove = true;
-        canBoost = true;
+        //canBoost = true;
+        canShoot = true;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     // Called every fixed timestep
@@ -41,21 +56,50 @@ public class Enemy : MonoBehaviour
 
         transform.up = dirNormalized;
 
-        if(dir.sqrMagnitude <= attackRadius && canBoost)
-        {
-            StartCoroutine(boost());
+        /* if(dir.sqrMagnitude <= attackRadius && canBoost){
+            StartCoroutine(boost()); */
+
+        if(canShoot){
+            StartCoroutine(shoot());
         }
 
-        else if(canMove)
+        if(canMove){
             rb2d.AddForce(transform.up * moveSpeed * Time.deltaTime, ForceMode2D.Force);
-        
+        }
     }
 
-    IEnumerator boost ()
+    /* IEnumerator boost()
     {
         canBoost = false; 
         rb2d.AddForce(transform.up * 10, ForceMode2D.Impulse);
         yield return new WaitForSeconds(5f);
         canBoost = true;
+<<<<<<< Updated upstream
     }
 }
+=======
+    } */
+    IEnumerator shoot()
+    {
+        canShoot = false;
+        Projectile.transform.position = (player.position-transform.position).normalized+transform.position;
+        Projectile.SetActive(true);
+        ProjectileTargeting = true;
+
+        yield return new WaitForSeconds(3f);
+        Projectile.SetActive(false);
+        canShoot = true;
+    }
+    public void reset(){
+        StopAllCoroutines();
+        Projectile.SetActive(false);
+        gameObject.SetActive(true);
+        rb2d.velocity = Vector2.zero;
+        gameObject.transform.position = new Vector3(0,-4,0);
+        canMove = true;
+        //canBoost = true;
+        canShoot = true;
+        gameObject.GetComponent<Collidable>().CanCollide = true;
+    }
+}
+>>>>>>> Stashed changes

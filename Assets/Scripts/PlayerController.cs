@@ -11,7 +11,11 @@ public class PlayerController : MonoBehaviour
     private bool canMove;
     private bool canBoost; 
 
+<<<<<<< Updated upstream
     public bool canCollide;
+=======
+    private bool canCollide;
+>>>>>>> Stashed changes
 
     private Rigidbody2D rb2d;   
     // Start is called before the first frame update
@@ -44,8 +48,9 @@ public class PlayerController : MonoBehaviour
         }
 
         else
+        {
             rb2d.drag = 0f;
-
+        }
     }
 
     // Called every fixed timestep
@@ -62,11 +67,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    IEnumerator boost ()
+    IEnumerator boost()
     {
         canBoost = false; 
         rb2d.AddForce(transform.up * 10, ForceMode2D.Impulse);
         yield return new WaitForSeconds(5f);
         canBoost = true;
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    public void reset(){
+        gameObject.SetActive(true);
+        rb2d.velocity = Vector2.zero;
+        gameObject.transform.position = new Vector3(0,4,0);
+        canMove = true;
+        canBoost = true;
+        gameObject.GetComponent<Collidable>().CanCollide = true;
+    }
+}
+>>>>>>> Stashed changes

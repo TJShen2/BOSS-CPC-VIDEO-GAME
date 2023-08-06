@@ -38,14 +38,16 @@ public class ScoreMenu : MonoBehaviour
     }
 
     void OnDisable() {
-
         //Check if anyone won
         if (playerWins == 5) {
             showWinScreen(true);
             Invoke("hideWinScreen", 2);
         } else if (enemyWins == 5) {
             showWinScreen(false);
+<<<<<<< Updated upstream:Assets/ScoreMenu.cs
             Invoke("hideWinScreen", 2);
+=======
+>>>>>>> Stashed changes:Assets/Scripts/ScoreMenu.cs
         } else
             resetPlayers.Invoke();
     }
@@ -57,6 +59,10 @@ public class ScoreMenu : MonoBehaviour
         } else {
             winText.SetText("You lose!");
         }
+<<<<<<< Updated upstream:Assets/ScoreMenu.cs
+=======
+        Invoke("hideWinScreen", 2);
+>>>>>>> Stashed changes:Assets/Scripts/ScoreMenu.cs
     }
 
     void hideWinScreen() {
@@ -64,6 +70,13 @@ public class ScoreMenu : MonoBehaviour
         enemyWins = 0;
 
         winScreen.SetActive(false);
+<<<<<<< Updated upstream:Assets/ScoreMenu.cs
     }
     
 }
+=======
+
+        resetPlayers.Invoke();
+    }   
+}
+>>>>>>> Stashed changes:Assets/Scripts/ScoreMenu.cs
